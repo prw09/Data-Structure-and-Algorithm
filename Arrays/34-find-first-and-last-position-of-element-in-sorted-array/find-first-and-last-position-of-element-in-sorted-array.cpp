@@ -30,8 +30,8 @@ public:
                 i = mid + 1;
             }
         }
-
-        vector<int> ans;
+        // Bs solution for this ques which gives the log n tc and o(1) space complexity....
+         vector<int> ans;
         ans.push_back(leftIndex);
         ans.push_back(rightIndex);
 
