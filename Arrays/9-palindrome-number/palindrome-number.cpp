@@ -2,24 +2,20 @@ class Solution {
 public:
     bool isPalindrome(int x) {
         
-          if(x < 0){
+    if( x < 0 || x >= 2147483647)
             return false;
-        }
-
-        int divisor = 1;
-        while(x/divisor >= 10){
-            divisor *= 10;
-        }
-
-        while(x != 0){
-            if (x / divisor != x % 10) {
+        long int num = 0;
+        int y = x;
+        while(x > 0){
+            num = num * 10;
+            if( num > 2147483647)
                 return false;
-            }
-            x %= divisor;
-            x /= 10;
-            divisor /= 100;
+            num = num + (x % 10);
+            x = x / 10;
         }
-
-        return true;
+        if(num == y)
+            return true;
+        else
+            return false;
     }
 };
