@@ -44,6 +44,31 @@
 // };
 
 
+int searchInsert(vector<int>& arr, int x)
+{
+	// Write your code here.
+    // it is the lower bound implementation of the code...
+	int n = arr.size();
+	int low = 0 , high = n-1;
+	int mid , ans = n;
+
+	while(low<=high){
+		mid = (low + high) / 2;
+
+		if(arr[mid] >= x){
+			ans = mid;
+			high = mid - 1;
+		}
+
+		else{
+			low = mid + 1;
+		}
+	}
+
+	return ans;	
+
+}
+
 class Solution {
     int binary_search(vector<int>&nums,int left,int right,int target){
         if(left > right)
