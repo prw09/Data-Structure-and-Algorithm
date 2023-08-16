@@ -2,7 +2,7 @@ class Solution {
 public:
     int search(vector<int>& nums, int target) {
         
-        // Linear Search Approach ...
+        // lowinear Search Approach ...
         // int n = nums.size() , x = target;
         // for(int i=0; i<n; i++){
         //     if(nums[i] == x){
@@ -14,26 +14,38 @@ public:
 
         // Binary Search Approach.....
 
-    int l = 0;
-    int r = nums.size() - 1;
+    int low = 0;
+    int high = nums.size() - 1, n = nums.size();
+    while (low <= high) {
+        int mid = (low + high) / 2;
 
-    while (l <= r) {
-      const int m = (l + r) / 2;
-      if (nums[m] == target)
-        return m;
-      if (nums[l] <= nums[m]) {  // nums[l..m] are sorted
-        if (nums[l] <= target && target < nums[m])
-          r = m - 1;
-        else
-          l = m + 1;
-      } else {  // nums[m..n - 1] are sorted
-        if (nums[m] < target && target <= nums[r])
-          l = m + 1;
-        else
-          r = m - 1;
-      }
+        //if mid points the target
+        if (nums[mid] == target) return mid;
+
+        //if left part is sorted:
+        if (nums[low] <= nums[mid]) {
+            if (nums[low] <= target && target <= nums[mid]) {
+                //element exists:
+                high = mid - 1;
+            }
+            else {
+                //element does not exist:
+                low = mid + 1;
+            }
+        }
+        else { //if right part is sorted:
+            if (nums[mid] <= target && target <= nums[high]) {
+                //element exists:
+                low = mid + 1;
+            }
+            else {
+                //element does not exist:
+                high = mid - 1;
+            }
+        }
     }
-
     return -1;
+   
+    
     }
 };
