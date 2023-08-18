@@ -1,27 +1,47 @@
 class Solution {
 public:
-    int trap(vector<int>& arr) {
+    int trap(vector<int>& height) {
             
-            int n = arr.size();  
-            int lmax[n]; lmax[0] = arr[0];
+        //     int n = arr.size();  
+        //     int lmax[n]; lmax[0] = arr[0];
                
-                for(int i=1;i<n;i++){
-                    int temp = max(arr[i], lmax[i-1]);
-                    lmax[i] = temp;
-                }
+        //         for(int i=1;i<n;i++){
+        //             int temp = max(arr[i], lmax[i-1]);
+        //             lmax[i] = temp;
+        //         }
                 
-                int rmax[n]; rmax[n-1] = arr[n-1];
-                for(int i=n-2; i>=0 ;i--){
-                    int temp = max(arr[i], rmax[i+1]);
-                    rmax[i] = temp;
-                }
+        //         int rmax[n]; rmax[n-1] = arr[n-1];
+        //         for(int i=n-2; i>=0 ;i--){
+        //             int temp = max(arr[i], rmax[i+1]);
+        //             rmax[i] = temp;
+        //         }
                 
-                int water=0;
-                for(int i=1;i<n-1;i++){
-                    water+= min(lmax[i], rmax[i]) - arr[i];
-                }
+        //         int water=0;
+        //         for(int i=1;i<n-1;i++){
+        //             water+= min(lmax[i], rmax[i]) - arr[i];
+        //         }
                 
-         return water;
+        //  return water;
 
-    }
+            // better approach....
+
+
+            const int n = height.size();
+            int ans = 0;
+            vector<int> l(n);  // l[i] := max(height[0..i])
+            vector<int> r(n);  // r[i] := max(height[i..n))
+
+            for (int i = 0; i < n; ++i)
+            l[i] = i == 0 ? height[i] : max(height[i], l[i - 1]);
+
+            for (int i = n - 1; i >= 0; --i)
+            r[i] = i == n - 1 ? height[i] : max(height[i], r[i + 1]);
+
+            for (int i = 0; i < n; ++i)
+            ans += min(l[i], r[i]) - height[i];
+
+            return ans;
+ 
+     }
 };
+
